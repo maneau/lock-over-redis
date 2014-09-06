@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.maneau</groupId>
-    <artifactId>lockoverredis</artifactId>
+    <artifactId>lock-over-redis</artifactId>
     <version>1.0-SNAPSHOT</version>
     <description>
         Simple Lock management using Redis as backend.

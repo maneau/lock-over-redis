@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.JedisPool;
@@ -54,6 +55,11 @@ public class BaseLockTest extends TestCase {
         public static String getProperty(String name) {
             return properties.getProperty(name);
         }
+    }
+
+    @Test
+    public void testBasic() {
+        assertNotNull(jedisPool);
     }
 
     @After
