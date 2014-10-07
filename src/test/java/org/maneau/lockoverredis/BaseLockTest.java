@@ -33,8 +33,8 @@ public class BaseLockTest extends TestCase {
         redisHost = Config.getProperty("redis.host");
         redisPort = Integer.valueOf(Config.getProperty("redis.port"));
 
-        jedisPool = new JedisPool(new GenericObjectPoolConfig(),
-                redisHost, redisPort, 20000);
+        GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
+        jedisPool = new JedisPool(poolConfig, redisHost, redisPort, 20000);
     }
 
     public JedisPool getJedisPool() {

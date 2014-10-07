@@ -17,7 +17,7 @@ import java.util.concurrent.locks.Lock;
 /**
  * Created by maneau on 05/09/2014.
  */
-public class LockFactory {
+public class LockFactory extends RedisDao {
 
     private static Logger LOGGER = LoggerFactory.getLogger(LockFactory.class);
 
@@ -29,14 +29,17 @@ public class LockFactory {
     private final AtomicLong statsLockFailed = new AtomicLong(0);
 
     private final static long DEFAULT_LOCK_TIME = 10;
+    private final static int DEFAULT_INDEX_ID = 5;
     private TimeUnit defaultUnitTime = TimeUnit.MINUTES;
     private long defaultLockTime = DEFAULT_LOCK_TIME;
 
     public LockFactory(Jedis jedis) {
+        super(jedis, DEFAULT_INDEX_ID);
         this.jedis = jedis;
     }
 
     public LockFactory(JedisPool jedisPool) {
+        super(jedisPool, DEFAULT_INDEX_ID);
         this.jedisPool = jedisPool;
     }
 
@@ -65,20 +68,6 @@ public class LockFactory {
     public void setDefaultExpire(long time, TimeUnit timeUnit) {
         this.defaultUnitTime = timeUnit;
         this.defaultLockTime = time;
-    }
-
-    public Jedis reserveJedis() {
-        if (jedisPool == null) {
-            return jedis;
-        } else {
-            return jedisPool.getResource();
-        }
-    }
-
-    public void releaseJedis(Jedis jedis) {
-        if (jedisPool != null) {
-            jedisPool.returnResource(jedis);
-        }
     }
 
     public MyLock getLock(String collectionName, UUID uuid) {
@@ -170,6 +159,7 @@ public class LockFactory {
 
     private long getInnerTtl(final MyLock myLock) {
         Jedis jedis = reserveJedis();
+
         long ttl = jedis.ttl(myLock.getLockKey());
         releaseJedis(jedis);
         return ttl;

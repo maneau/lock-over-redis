@@ -31,6 +31,13 @@ Then do what you want this your lock
  - getTTL() 
  - isLocked() to check if my lock is valid
 
+## Docker
+
+Some usefull command for starting docker redis
+inside the git-bash.bat shell :
+> start.sh
+> docker run --rm -p 0.0.0.0:6379:6379 redis
+ 
 ## Very powerfull
 
 It can manage over 600 locks per seconds and even in rough situation no conflicts detected.
