@@ -6,7 +6,6 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Response;
 import redis.clients.jedis.Transaction;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -99,7 +98,7 @@ public class LockFactory extends RedisDao {
 
         @Override
         public void lockInterruptibly() throws InterruptedException {
-            throw new NotImplementedException();
+            throw new RuntimeException("Not implemented");
         }
 
         @Override
@@ -123,7 +122,7 @@ public class LockFactory extends RedisDao {
 
         @Override
         public Condition newCondition() {
-            throw new NotImplementedException();
+            throw new RuntimeException("Not implemented");
         }
 
         public long getTtl() {

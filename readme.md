@@ -33,10 +33,10 @@ Then do what you want this your lock
 
 ## Docker
 
-Some usefull command for starting docker redis
-inside the git-bash.bat shell :
-> start.sh
-> docker run --rm -p 0.0.0.0:6379:6379 redis
+Some usefull command for starting docker redis :
+```
+docker run --rm -p 6379:6379 redis
+```
  
 ## Very powerfull
 
